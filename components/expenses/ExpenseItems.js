@@ -12,7 +12,7 @@ export const ExpenseItem = ({ description, amount, date }) => {
           <Text style={styles.textBase}>{getFormatedDate(date)}</Text>
         </View>
         <View style={styles.amountContainer}>
-          <Text style={styles.amount}>${amount}</Text>
+          <Text style={styles.amount}>${amount.toFixed(2)}</Text>
         </View>
       </View>
     </Pressable>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 4,
-    width: 100
+    minWidth: 80
   },
   amount: {
     color: GlobalStyles.colors.primary500,
