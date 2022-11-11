@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { IconButton } from './components/UI/IconButton';
 
 import { AllExpenses } from './screens/AllExpenses';
 import { ManageExpense } from './screens/ManageExpense';
@@ -20,6 +21,9 @@ const Overview = () => {
         headerTintColor: 'white',
         tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         tabBarActiveTintColor: GlobalStyles.colors.accent500,
+        headerRight: ({ tintColor }) => (
+          <IconButton icon="add" size={24} color={tintColor} onPress={() => {}} />
+        ),
       }}
     >
       <BottomTab.Screen
