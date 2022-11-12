@@ -3,10 +3,12 @@ import { GlobalStyles } from '../../utilities/Colors';
 import {getFormatedDate} from '../../utilities/date';
 import { useNavigation } from '@react-navigation/native';
 
-export const ExpenseItem = ({ description, amount, date }) => {
+export const ExpenseItem = ({ description, amount, date, id }) => {
   const navigation = useNavigation()
   const handleItemPress = () => {
-    navigation.navigate('ManageExpense');
+    navigation.navigate('ManageExpense', {
+      expenseId: id
+    });
   }
     
   return (

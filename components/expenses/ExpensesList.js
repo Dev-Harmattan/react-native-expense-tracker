@@ -6,6 +6,7 @@ const renderListItem = ({ item }) => (
     description={item.description}
     amount={item.amount}
     date={item.date}
+    id={item.id}
   />
 );
 
