@@ -9,3 +9,7 @@ export const getFormatedDate = (date) => {
     paddingStart(date.getDate() + 1),
   ].join('-');
 }
+
+export const getRecentDateMinusDays = (date, days) => {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - days)
+}

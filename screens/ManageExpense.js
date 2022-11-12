@@ -1,17 +1,40 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from '../components/UI/Button';
 import { IconButton } from '../components/UI/IconButton';
+import { ExpensesContext } from '../store/expensesContext';
 
 import { GlobalStyles } from '../utilities/Colors';
 
 export const ManageExpense = ({ route, navigation }) => {
+  const expensesContext = useContext(ExpensesContext);
   const expenseId = route.params?.expenseId;
   const isEditable = !!expenseId;
 
-  const handleDeleteItem = () => {};
-  const handleCancelButton = () => {};
-  const handleConfirmButton = () => {};
+  const handleDeleteItem = () => {
+    navigation.goBack();
+    expensesContext.deleteExpense(expenseId);
+  };
+  const handleCancelButton = () => {
+    navigation.goBack();
+  };
+  const handleConfirmButton = () => {
+    navigation.goBack();
+    if (isEditable) {
+      // const updateData = expensesContext.expenses.filter(expense => expense.id === expenseId);
+      expensesContext.updateExpense(expenseId, {
+        description: 'test edit',
+        amount: 99.9,
+        date: new Date('2022/11/06'),
+      });
+    } else {
+      expensesContext.addExpense({
+        description: 'test',
+        amount: 99.9,
+        date: new Date('2022/11/06'),
+      });
+    }
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -35,6 +58,7 @@ export const ManageExpense = ({ route, navigation }) => {
             icon="trash"
             size={34}
             color={GlobalStyles.colors.error500}
+            onPress={handleDeleteItem}
           />
         </View>
       )}
@@ -55,7 +79,7 @@ const styles = StyleSheet.create({
   },
   button: {
     minWidth: 120,
-    marginHorizontal: 8
+    marginHorizontal: 8,
   },
   deleteContainer: {
     marginTop: 16,
