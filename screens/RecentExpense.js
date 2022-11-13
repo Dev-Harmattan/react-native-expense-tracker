@@ -8,7 +8,6 @@ export const RecentExpense = () => {
   const expenseContext = useContext(ExpensesContext);
   const todayDate = new Date();
   const recentDate = getRecentDateMinusDays(todayDate, 7);
-  console.log(recentDate);
 
   const recentExpenses = expenseContext.expenses.filter(
     (expense) => expense.date > recentDate

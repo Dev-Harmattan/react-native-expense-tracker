@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Button } from '../components/UI/Button';
 import { IconButton } from '../components/UI/IconButton';
 import { ExpensesContext } from '../store/expensesContext';
+import {ExpenseForm} from '../components/manageExpense/ExpenseForm';
 
 import { GlobalStyles } from '../utilities/Colors';
 
@@ -44,6 +45,7 @@ export const ManageExpense = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      <ExpenseForm />
       <View style={styles.buttons}>
         <Button style={styles.button} mode="flat" onPress={handleCancelButton}>
           Cancel
