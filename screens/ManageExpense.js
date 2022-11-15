@@ -63,7 +63,7 @@ export const ManageExpense = ({ route, navigation }) => {
   };
 
   if (error && !isFetching)
-    return <ErrorOverlay message={error} onPress={handleError} />;
+    return <ErrorOverlay message={error} />;
 
   if (isFetching) return <LoadingOverlay />;
 

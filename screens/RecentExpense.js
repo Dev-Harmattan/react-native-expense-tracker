@@ -32,7 +32,7 @@ export const RecentExpense = () => {
     setError(null);
   }
 
-  if(error && !isFetching) return <ErrorOverlay message={error} onPress={handleError} />
+  if(error && !isFetching) return <ErrorOverlay message={error} />
 
   const recentExpenses = expenseContext.expenses.filter(
     (expense) => expense.date > recentDate
