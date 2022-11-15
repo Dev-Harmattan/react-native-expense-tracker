@@ -27,7 +27,6 @@ export const ExpenseForm = ({
     },
   });
   const handleInputChange = (type, value) => {
-    console.log(type, value);
     setInputs((prevInputs) => ({
       ...prevInputs,
       [type]: { value: value, isValid: true },

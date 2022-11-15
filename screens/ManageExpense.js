@@ -3,31 +3,36 @@ import { StyleSheet, View } from 'react-native';
 import { Button } from '../components/UI/Button';
 import { IconButton } from '../components/UI/IconButton';
 import { ExpensesContext } from '../store/expensesContext';
-import {ExpenseForm} from '../components/manageExpense/ExpenseForm';
+import { ExpenseForm } from '../components/manageExpense/ExpenseForm';
 
 import { GlobalStyles } from '../utilities/Colors';
+import { deleteExpense, storeExpense, updateExpense } from '../utilities/http';
 
 export const ManageExpense = ({ route, navigation }) => {
   const expensesContext = useContext(ExpensesContext);
   const expenseId = route.params?.expenseId;
   const isEditable = !!expenseId;
 
-  const defaultExpenseValue = expensesContext.expenses.find(expense => expense.id === expenseId);
+  const defaultExpenseValue = expensesContext.expenses.find(
+    (expense) => expense.id === expenseId
+  );
 
-  const handleDeleteItem = () => {
+  const handleDeleteItem = async () => {
     navigation.goBack();
+    await deleteExpense(expenseId);
     expensesContext.deleteExpense(expenseId);
   };
   const handleCancelButton = () => {
     navigation.goBack();
   };
-  const handleConfirmButton = (expenseData) => {
+  const handleConfirmButton = async (expenseData) => {
     navigation.goBack();
     if (isEditable) {
-      // const updateData = expensesContext.expenses.filter(expense => expense.id === expenseId);
       expensesContext.updateExpense(expenseId, expenseData);
+      await updateExpense(expenseId, expenseData);
     } else {
-      expensesContext.addExpense(expenseData);
+      const id = await storeExpense(expenseData);
+      expensesContext.addExpense({id: id, ...expenseData});
     }
   };
 
